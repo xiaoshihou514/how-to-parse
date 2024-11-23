@@ -1,0 +1,21 @@
+[package]
+name = "parsing_post"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+lexgen = "0.15.0"
+lexgen_util = "0.15.0"
+oorandom = "11.1.4" # for benchmark input generation
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[bin]]
+name = "test_gen"
+path = "bin/test_gen.rs"
+
+[[bench]]
+name = "bench"
+path = "bin/bench.rs"
+harness = false
