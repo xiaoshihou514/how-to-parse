@@ -1,8 +1,8 @@
 // format: off
 //> using scala 3.3.3
-//> using platform native
-//> using nativeVersion 0.4.17
-//> using dep com.github.j-mie6::parsley::4.5.2
+////> using platform native
+////> using nativeVersion 0.4.17
+//> using dep com.github.j-mie6::parsley::5.0.0-M6
 
 import parsley.Parsley
 import parsley.character.item
@@ -36,7 +36,7 @@ object lexer {
 import lexer.number
 import lexer.implicits._
 
-val str = "\"" ~> manyTill(item, "\"").map(_.mkString)
+val str = "\"" ~> manyTill(item, "\"").span
 
 val int = number.map(Json.Int.apply)
 
@@ -78,8 +78,9 @@ import java.nio.file.{Files, Paths}
     assert(parseResult.isSuccess)
     val durationSeconds = (endTime - startTime) / 1e9
     val mbps = fileBytes / durationSeconds
+    val ms = durationSeconds * 1e3
     println(
-      f"Parsing successful! Processed $fileBytes Mb in $durationSeconds%.3f seconds ($mbps%.3f Mb/s)."
+      f"Parsing successful! Processed $fileBytes Mb in $ms ms ($mbps%.3f Mb/s)."
     )
   }
 }
